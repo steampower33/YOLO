@@ -6,7 +6,7 @@ from ultralytics import YOLO
 model = YOLO('yolov8n.pt')  # Replace with the path if necessary
 
 # Load your video file
-video_path = 'path_to_your_video.mp4'  # Replace with your actual video file path
+video_path = 'video/floor_5.mp4'  # Replace with your actual video file path
 cap = cv2.VideoCapture(video_path)
 
 # Check if video opened successfully
@@ -19,6 +19,9 @@ while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
         break  # Exit the loop if no frame is returned
+
+    # resize frame
+    frame = cv2.resize(frame, (640, 480))
 
     # Perform YOLOv8 object detection
     results = model(frame)
